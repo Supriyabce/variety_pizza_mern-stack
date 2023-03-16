@@ -5,6 +5,7 @@ const connectDB = require("./config/config");
 require('colors')
 const morgan = require('morgan')
 const path = require('path');
+import { fileURLToPath } from 'url';
 
 
 //config dotenv
@@ -12,6 +13,10 @@ dotenv.config();
 
 //connection mongodb
 connectDB();
+
+//esmodule fix
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
  
 const app =express()
 
@@ -24,7 +29,7 @@ app.use(express.static(path.join(__dirname, './client/build')))
 app.use("/api/pizzas",require("./routes/pizzaRoute"));
 app.use("/api/users",require("./routes/userRoutes"));
 app.use("/api/orders",require("./routes/orderRoute"));
-
+app.use(express.static(path.join(__dirname,'/client/build')));
 
 //
 // if (process.env.NODE_ENV === "production") {
@@ -37,12 +42,11 @@ app.use("/api/orders",require("./routes/orderRoute"));
 //     res.send("<h1>Hello From Node Server vai nodemon</h1>");
 //   });
 // }
+app.use('*',function(req,res){
+  res.sendFile(path.join(__dirname,"/client/build/index.html"));
+});
 
-//rest api
-app.use("*",function(req,res){
-  res.sendFile(path.join(__dirname,"./client/build/index.html"));
-})
-
+//run listen
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
   console.log(
