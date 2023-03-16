@@ -5,7 +5,6 @@ const connectDB = require("./config/config");
 require('colors')
 const morgan = require('morgan')
 const path = require('path');
-import { fileURLToPath } from 'url';
 
 
 //config dotenv
@@ -14,9 +13,6 @@ dotenv.config();
 //connection mongodb
 connectDB();
 
-//esmodule fix
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
  
 const app =express()
 
