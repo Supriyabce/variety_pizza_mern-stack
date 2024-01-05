@@ -32,9 +32,6 @@ Variety Pizza is an E-Commerce platform that allows users to order delicious piz
   - Node.js and Express.js for server-side development.
   - MongoDB for storing data.
 
-- **Other:**
-  - MERN Stack (MongoDB, Express.js, React.js, Node.js) for a seamless end-to-end experience.
-
 ## Prerequisites
 
 - Node.js and npm installed.
